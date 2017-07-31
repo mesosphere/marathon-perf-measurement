@@ -7,3 +7,4 @@ For this testing setup we use the following setup:
 
 We do have 100 applications with each one running instance. We do update 10 random apps every 30 seconds and measure the response time of `/v2/apps` every second.
 This is shown in the `response time` graph.
+In the meantime we attach to the running marathon process with a profiler and publish the `memory footprint` graph and `time spent` graph.
