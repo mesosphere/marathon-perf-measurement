@@ -32,7 +32,7 @@ Between all test runs, marathon and Mesos was restarted and zookeeper data delet
 # Test scenario
 For this testing setup we use the following setup:
 
-We do have 800 applications with each one running instance. We do update N random apps every 30 seconds and measure the response time of `/v2/apps` every second over the entire test period. This is shown in the `response time` graph.
+We do have 800 applications with each one running instance. We update N random apps every 30 seconds and measure the response time of `/v2/apps` every second over the entire test period. This is shown in the `response time` graph.
 
 In the meantime we attach to the running Marathon process with a profiler and publish the `memory usage`, `cpu usage`, `thread count` and `memory footprint` graph.
 
