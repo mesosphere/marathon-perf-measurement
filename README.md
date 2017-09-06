@@ -37,7 +37,7 @@ We do have 800 applications with each one running instance. We do update N rando
 In the meantime we attach to the running Marathon process with a profiler and publish the `memory usage`, `cpu usage`, `thread count` and `memory footprint` graph.
 
 
-# Marathon master (1.5-SNAPSHOT) of 9/6/17
+# Marathon master (1.5-SNAPSHOT) of 2017-09-06
 
 ## Observations
 The first test run was with 100 random applications which were restarted every 30 seconds. In this scenario Marathon was able to serve all deployments for around 10 minutes and then marathon started to respond with `HTTP response 500: {“message”:“GroupManager queue may not exceed 500 entries”}`, which indicates that Marathon gets too many new deployments and finished too few at the same time. Stopping the test which triggers new deployments leads to the state, that Marathon recovers and was able to operate normally after around 2 minutes. Therefore the test below updates 30 random application every 30 seconds.
