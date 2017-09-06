@@ -11,7 +11,7 @@ The Mesos setup contained 1 Mesos master and 5 Mesos agents, as well as 1 Marath
 Marathon was packaged as jar/zip before running the test to be independent from sbt. For marathon 1.5 `sbt universal:packageZipTarball` was used and for marathon 1.4 and 1.3 `sbt assembly` was used. 
 
 ## Starting Marathon
-Marathon 1.5 was started with `./marathon -J-Xmx6G -J-Xms6G --disable_store_cache --master 127.0.0.1:5050`, 1.4 with `java -Xmx6G -Xms6G -jar marathon-assembly-1.4.2.jar --master 127.0.0.1:5050` and 1.3 with `java -Xmx6G -Xms6G -jar marathon-assembly-1.3.12.jar --master 127.0.0.1:5050`.
+Marathon 1.5 was started with `./marathon -J-Xmx6G -J-Xms6G --master 127.0.0.1:5050`, 1.4 with `java -Xmx6G -Xms6G -jar marathon-assembly-1.4.2.jar --master 127.0.0.1:5050` and 1.3 with `java -Xmx6G -Xms6G -jar marathon-assembly-1.3.12.jar --master 127.0.0.1:5050`.
 
 ## Starting Mesos
 The Mesos cluster was started with the commands below:
