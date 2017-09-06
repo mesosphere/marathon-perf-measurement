@@ -35,3 +35,28 @@ For this testing setup we use the following setup:
 We do have 800 applications with each one running instance. We do update N random apps every 30 seconds and measure the response time of `/v2/apps` every second over the entire test period. This is shown in the `response time` graph.
 
 In the meantime we attach to the running Marathon process with a profiler and publish the `memory usage`, `cpu usage`, `thread count` and `memory footprint` graph.
+
+
+# Marathon master (1.5-SNAPSHOT) of 9/6/17
+
+## Observations
+The first test run was with 100 random applications which were restarted every 30 seconds. In this scenario Marathon was able to serve all deployments for around 10 minutes and then marathon started to respond with `HTTP response 500: {“message”:“GroupManager queue may not exceed 500 entries”}`, which indicates that Marathon gets too many new deployments and finished too few at the same time. Stopping the test which triggers new deployments leads to the state, that Marathon recovers and was able to operate normally after around 2 minutes. Therefore the test below updates 30 random application every 30 seconds.
+
+## Deployment durations
+### 800 applications with 1 instance each
+- 62s to deploy 800 sleepy tasks
+- 65s to deploy 800 sleepy tasks
+
+### 500 applications with 1 instance each
+- 34s to deploy 500 sleepy tasks
+- 32s to deploy 500 sleepy tasks
+
+## Graphs
+### Profiler
+![Master Profiler](master.png)
+
+### Memory sampler
+![Master Memory Profiler](master-sampler.png)
+
+### Response times of v2/apps in the meantime
+![Master Memory Profiler](master-v2.png)
