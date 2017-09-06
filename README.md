@@ -51,6 +51,9 @@ The first test run was with 100 random applications which were restarted every 3
 - 34s to deploy 500 sleepy tasks
 - 32s to deploy 500 sleepy tasks
 
+## Additional test with `--disable-store-cache`
+Marathon 1.4 and 1.5 are able to disable caching in the storage layer. If this cache was disabled Marathon was not able to store the initial POST request to store the initial 800 applications. Storing single application POST requests were processed normally.
+
 ## Graphs
 ### Profiler
 ![Master Profiler](master.png)
@@ -61,19 +64,20 @@ The first test run was with 100 random applications which were restarted every 3
 ### Response times of v2/apps in the meantime
 ![Master Memory Profiler](master-v2.png)
 
+
 # Marathon 1.4.2
 
 ## Observations
-The first test run was with 30 random applications which were restarted every 30 seconds. In this scenario Marathon was able to serve all deployments for around 3 to 5 minutes and then marathon started to respond with `HTTP response 409: {“message”:“App is locked by one or more deployments. ...”}` and/or `Futures timed out after [10000 milliseconds]` , which indicates that Marathon gets too many new deployments and finished too few at the same time. Stopping the test which triggers new deployments leads to the state, that Marathon recovers and was able to operate normally after around 3 minutes. In one run Marathon was not able to recover and responeded persistently with `HTTP 500: Futures timed out after [10000 milliseconds]`, compare [MARATHON-7400](https://jira.mesosphere.com/browse/MARATHON-7400).
+The test run was with 30 random applications which were restarted every 30 seconds. In this scenario Marathon was able to serve all deployments for around 3 to 5 minutes and then marathon started to respond with `HTTP response 409: {“message”:“App is locked by one or more deployments. ...”}` and/or `Futures timed out after [10000 milliseconds]` , which indicates that Marathon gets too many new deployments and finished too few at the same time. Stopping the test which triggers new deployments leads to the state, that Marathon recovers and was able to operate normally after around 3 minutes. In one run Marathon was not able to recover and responeded persistently with `HTTP 500: Futures timed out after [10000 milliseconds]`, compare [MARATHON-7400](https://jira.mesosphere.com/browse/MARATHON-7400).
 
 ## Deployment durations
 ### 800 applications with 1 instance each
-- 62s to deploy 800 sleepy tasks
-- 65s to deploy 800 sleepy tasks
+- 75s to deploy 800 sleepy tasks
+- 72s to deploy 800 sleepy tasks
 
 ### 500 applications with 1 instance each
-- 34s to deploy 500 sleepy tasks
-- 32s to deploy 500 sleepy tasks
+- 43s to deploy 500 sleepy tasks
+- 46s to deploy 500 sleepy tasks
 
 ## Graphs
 ### Profiler
@@ -84,3 +88,28 @@ The first test run was with 30 random applications which were restarted every 30
 
 ### Response times of v2/apps in the meantime
 ![Master Memory Profiler](14-v2.png)
+
+
+# Marathon 1.3.12
+
+## Observations
+The first test run was with 100 random applications which were restarted every 30 seconds. In this scenario Marathon was able to serve all deployments for around 5 minutes and then marathon started to respond with `HTTP response 409: {“message”:“App is locked by one or more deployments. ...”}` and/or `Futures timed out after [10000 milliseconds]` , which indicates that Marathon gets too many new deployments and finished too few at the same time. Stopping the test which triggers new deployments leads to the state, that Marathon recovers and was able to operate normally after around 3 minutes. Therefore the test below updates 30 random application every 30 seconds.
+
+## Deployment durations
+### 800 applications with 1 instance each
+- 60s to deploy 800 sleepy tasks
+- 67s to deploy 800 sleepy tasks
+
+### 500 applications with 1 instance each
+- 40s to deploy 500 sleepy tasks
+- 40s to deploy 500 sleepy tasks
+
+## Graphs
+### Profiler
+![Master Profiler](13.png)
+
+### Memory sampler
+![Master Memory Profiler](13-sampler.png)
+
+### Response times of v2/apps in the meantime
+![Master Memory Profiler](13-v2.png)
