@@ -65,6 +65,31 @@ Marathon 1.4 and 1.5 are able to disable caching in the storage layer. If this c
 ![Master Memory Profiler](master-v2.png)
 
 
+# Marathon 1.4.7
+
+## Observations
+Same observations as seen on Marathon 1.5-SNAPSHOT.
+
+## Deployment durations
+### 800 applications with 1 instance each
+- 62s to deploy 800 sleepy tasks
+- 64s to deploy 800 sleepy tasks
+
+### 500 applications with 1 instance each
+- 35s to deploy 500 sleepy tasks
+- 33s to deploy 500 sleepy tasks
+
+## Graphs
+### Profiler
+![Master Profiler](147.png)
+
+### Memory sampler
+![Master Memory Profiler](147-sampler.png)
+
+### Response times of v2/apps in the meantime
+![Master Memory Profiler](147-v2.png)
+
+
 # Marathon 1.4.2
 
 ## Observations
