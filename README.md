@@ -36,6 +36,28 @@ We do have 800 applications with each one running instance. We update N random a
 
 In the meantime we attach to the running Marathon process with a profiler and publish the `memory usage`, `cpu usage`, `thread count` and `memory footprint` graph.
 
+# UPDATE December 2017
+
+We found a major performance issue during the process of updating applications. Basically every deployment was affected by this issue.
+
+## The re-test
+This improvement only affects the updating of applications, so the performance of initial deployment was not increased. But the performance increase during application updates was so big, that we decided to update 200 applications every 30 seconds. In comparison, the unpatched versions of 1.4 and 1.5 were not able to update more than 50 applications every 30 seconds.
+
+### 1.5.4 including patch
+
+### Profiler
+![Master Profiler](154-patched-200.png)
+
+### Response times of v2/apps in the meantime
+![Master Memory Profiler](154-patched-200-v2.png)
+
+### 1.4.7 including patch
+
+### Profiler
+![Master Profiler](147-patched-200.png)
+
+### Response times of v2/apps in the meantime
+![Master Memory Profiler](147-patched-200-v2.png)
 
 # Marathon master (1.5-SNAPSHOT) of 2017-09-06
 
