@@ -40,6 +40,18 @@ In the meantime we attach to the running Marathon process with a profiler and pu
 
 We found a major performance issue during the process of updating applications. Basically every deployment was affected by this issue.
 
+## The issue
+
+Every application without a configured port will get a random [service port](https://mesosphere.github.io/marathon/docs/ports.html#specifying-service-ports) assigned by marathon. This happens during the process of persisting the application(s) to zookeeper. During the storage of the root group, marathon will re-calculate the service port assignment for all applications with no manual assigned service port. Marathon will re-calculate all ports for all applications over and over again, even though marathon did this already. This calculation is deterministic, so it did not change the port assignments, but it wastes a lot of compute time.
+
+## The fix
+The fix is quite simple. Marathon stops re-calculating the random service port assignments after the first calculation. You can have a look at the fixes here:
+
+- [master](https://github.com/mesosphere/marathon/pull/5787)
+- [1.5](https://github.com/mesosphere/marathon/pull/5796)
+- [1.4](https://github.com/mesosphere/marathon/pull/5816)
+
+
 ## The re-test
 This improvement only affects the updating of applications, so the performance of initial deployment was not increased. But the performance increase during application updates was so big, that we decided to update 200 applications every 30 seconds. In comparison, the unpatched versions of 1.4 and 1.5 were not able to update more than 50 applications every 30 seconds.
 
